@@ -42,3 +42,18 @@ Stopping all the running containers is also simple with a single command:
 ```bash
 docker-compose down
 ```
+
+## Integrations
+
+### Eufy
+    https://www.npmjs.com/package/eufy-security-client
+### Home Assistant
+    https://www.home-assistant.io/
+    https://www.home-assistant.io/installation/raspberrypi#docker-compose
+### Google 
+    https://developers.google.com/nest/device-access/codelabs/web-app#0   
+    https://developers.google.com/nest/device-access/project
+### Alexa
+    https://developer.amazon.com/en-US/docs/alexa/smarthome/understand-the-smart-home-skill-api.html
+### tp-link
+    https://github.com/konsumer/tplink-lightbulb/blob/main/API.md
