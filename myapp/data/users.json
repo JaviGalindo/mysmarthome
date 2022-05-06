@@ -1,0 +1,18 @@
+[{
+    "userId": "33adc5c7-f761-4464-aed4-04e51ef923e9",
+    "name": "yackroyd0",
+    "email": "mcrowdace0@amazon.com",
+    "active": true
+  }, {
+    "userId": "68f90ed3-4f08-4a07-ad1e-387f495ea898",
+    "name": "ahumfrey1",
+    "email": "yadolthine1@live.com",
+    "active": true
+  },
+  {
+    "userId": "45f90ed3-4f08-4a07-ad1e-387f495ea898",
+    "name": "amiller1",
+    "email": "amiller@live.com",
+    "active": false
+  }
+]

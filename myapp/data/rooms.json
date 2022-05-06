@@ -1,0 +1,22 @@
+[{
+    "roomId": "217a4f8e-56b6-4765-905e-dd868759394c",
+    "name": "Main Bedroom"
+  }, {
+    "roomId": "d5546b36-0369-450a-9f7f-169a3a7c20a7",
+    "name": "Studio"
+  }, {
+    "roomId": "56446b3c-a637-4935-a063-2fe15dffb32c",
+    "name": "Kitchen"
+  }, {
+    "roomId": "1e23b831-0c93-4de1-b68c-16819828c0ea",
+    "name": "Living room"
+  }, {
+    "roomId": "dc80a947-324f-4a70-a869-39c413142fa3",
+    "name": "Landing"
+  }, {
+    "roomId": "d2db1b36-ae18-42e9-818c-ccdb4d87c169",
+    "name": "Garden"
+  }, {
+    "roomId": "0e53dcda-67f4-46b6-ade1-5359b1a2b1d5",
+    "name": "Front Door"
+  }]
