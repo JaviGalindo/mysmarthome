@@ -57,3 +57,8 @@ docker-compose down
     https://developer.amazon.com/en-US/docs/alexa/smarthome/understand-the-smart-home-skill-api.html
 ### tp-link
     https://github.com/konsumer/tplink-lightbulb/blob/main/API.md
+
+
+
+### API structure
+https://www.coreycleary.me/project-structure-for-an-express-rest-api-when-there-is-no-standard-way

@@ -1,6 +1,6 @@
 FROM node:14
 
-WORKDIR /myapp-app
+WORKDIR /myapp
 COPY package.json .
 RUN npm install
 COPY . .
