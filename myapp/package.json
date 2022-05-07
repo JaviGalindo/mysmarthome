@@ -2,9 +2,10 @@
   "name": "my-smart-home",
   "version": "1.0.0",
   "description": "An application to manage all your home devices",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
   },
   "keywords": [
     "nodejs",
