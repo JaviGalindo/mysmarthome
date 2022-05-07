@@ -1,49 +1,49 @@
 [{
-    "deviceId": "b84834c1-36ed-4f1c-9dff-d9ac41d932f8",
+    "deviceId": 1,
     "name": "Speaker bedroom",
     "roomId": null,
-    "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+    "providerId": 1,
     "active": false
   }, {
-    "deviceId": "688cc87f-7375-4857-96ec-8747fde9c285",
+    "deviceId": 2,
     "name": "Speaker kitchen",
-    "roomId": "90f92ec4-0174-480c-a05c-19c1b56e292e",
-    "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+    "roomId": 3,
+    "providerId": 1,
     "active": true
   }, {
-    "deviceId": "312c2d5d-3420-4686-ac92-ea56de710267",
+    "deviceId": 3,
     "name": "Plug 1",
-    "roomId": "f6820f07-258b-4a6d-9906-ea20dc8f4f53",
-    "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+    "roomId": null,
+    "providerId": 1,
     "active": true
   }, {
-    "deviceId": "d5fb1890-1ec2-4550-8a7b-871f4a7669d0",
+    "deviceId": 4,
     "name": "Camera Garden",
-    "roomId": "547812f2-ba24-4364-aa8c-6773d250dd5d",
-    "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+    "roomId": 6,
+    "providerId": 1,
     "active": false
   }, {
-    "deviceId": "ac588d0c-db7e-485e-a838-0d901c95e12a",
+    "deviceId": 5,
     "name": "Strip Lights",
-    "roomId": "850b9436-6653-4ee7-9f99-b8d10b039a21",
-    "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+    "roomId": 4,
+    "providerId": 1,
     "active": true
   }, {
-    "deviceId": "3f12aa60-8c57-4309-ac26-db2379b036c8",
+    "deviceId": 6,
     "name": "Doorbell",
-    "roomId": "5f4811f7-9b7c-47d8-9def-4c32e307f4ce",
-    "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+    "roomId":7,
+    "providerId": 1,
     "active": true
   }, {
-    "deviceId": "fbc7a656-3d00-4355-b6d3-6648989ad906",
+    "deviceId": 7,
     "name": "Bulb",
-    "roomId": "db2bc7bd-6832-4beb-b97f-f7565abfe68a",
-    "providerId": "8d37ebb2-1f1e-4f24-853a-754b31cfabf5",
+    "roomId": 1,
+    "providerId":2,
     "active": true
   }, {
-    "deviceId": "2de2aed7-440a-4ec4-93d7-70f7d13a54f4",
+    "deviceId": 8,
     "name": "Plug living room",
-    "roomId": null,
-    "providerId": "8d37ebb2-1f1e-4f24-853a-754b31cfabf5",
+    "roomId": 4,
+    "providerId":2,
     "active": true
   }]
