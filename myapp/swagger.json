@@ -1,0 +1,201 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "App to manage smart devices at home",
+    "version": "1.0.0",
+    "title": "My Smart Home APP"
+  },
+  "tags": [
+    {
+      "name": "Device",
+      "description": "Operations about Devices"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/devices": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Get all devices",
+        "description": "",
+        "operationId": "getAllDevices",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Create Device",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createDevice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created device object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Get Device by Id",
+        "description": "",
+        "operationId": "getDeviceById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The id that needs to be fetched.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Updated Device",
+        "description": "This can only be done by the logged in Device.",
+        "operationId": "updateDevice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "id that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated id object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid device supplied"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Delete Device",
+        "operationId": "deleteDevice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "roomId": {
+          "type": "integer"
+        },
+        "providerId": {
+          "type": "integer"
+        },
+        "active": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  }
+}
