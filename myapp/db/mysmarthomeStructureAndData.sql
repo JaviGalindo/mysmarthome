@@ -28,7 +28,7 @@ USE `mysmarthome`;
 --
 
 CREATE TABLE `devices` (
-  `deviceId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `roomId` int(11) DEFAULT NULL,
   `providerId` int(11) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `devices` (
 -- Dumping data for table `devices`
 --
 
-INSERT INTO `devices` (`deviceId`, `name`, `roomId`, `providerId`, `active`) VALUES
+INSERT INTO `devices` (`id`, `name`, `roomId`, `providerId`, `active`) VALUES
 (1, 'Speaker bedroom', NULL, 1, 0),
 (2, 'Speaker kitchen', 3, 1, 1),
 (3, 'Plug 1', NULL, 1, 1),
@@ -56,7 +56,7 @@ INSERT INTO `devices` (`deviceId`, `name`, `roomId`, `providerId`, `active`) VAL
 --
 
 CREATE TABLE `providers` (
-  `providerId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `SSO` mediumtext,
   `connection` int(11) DEFAULT NULL
@@ -66,7 +66,7 @@ CREATE TABLE `providers` (
 -- Dumping data for table `providers`
 --
 
-INSERT INTO `providers` (`providerId`, `name`, `SSO`, `connection`) VALUES
+INSERT INTO `providers` (`id`, `name`, `SSO`, `connection`) VALUES
 (1, 'Amazon', NULL, NULL),
 (2, 'Google', NULL, NULL);
 
@@ -77,7 +77,7 @@ INSERT INTO `providers` (`providerId`, `name`, `SSO`, `connection`) VALUES
 --
 
 CREATE TABLE `rooms` (
-  `roomId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -85,7 +85,7 @@ CREATE TABLE `rooms` (
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`roomId`, `name`) VALUES
+INSERT INTO `rooms` (`id`, `name`) VALUES
 (1, 'Main Bedroom'),
 (2, 'Studio'),
 (3, 'Kitchen'),
@@ -101,7 +101,7 @@ INSERT INTO `rooms` (`roomId`, `name`) VALUES
 --
 
 CREATE TABLE `routines` (
-  `routineId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `deviceId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `routines` (
 -- Dumping data for table `routines`
 --
 
-INSERT INTO `routines` (`routineId`, `userId`, `deviceId`, `name`, `schedule`) VALUES
+INSERT INTO `routines` (`id`, `userId`, `deviceId`, `name`, `schedule`) VALUES
 (1, 2, 5, 'Switch off strip lights everyday at 23', '0 23 * * *');
 
 -- --------------------------------------------------------
@@ -122,7 +122,7 @@ INSERT INTO `routines` (`routineId`, `userId`, `deviceId`, `name`, `schedule`) V
 --
 
 CREATE TABLE `users` (
-  `userId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
@@ -132,7 +132,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userId`, `username`, `email`, `active`) VALUES
+INSERT INTO `users` (`id`, `username`, `email`, `active`) VALUES
 (1, 'yackroyd0', 'mcrowdace0@amazon.com', 1),
 (2, 'ahumfrey1', 'yadolthine1@live.com', 1),
 (3, 'amiller1', 'amiller@live.com', 0);
@@ -170,7 +170,7 @@ INSERT INTO `users_devices` (`userId`, `deviceId`) VALUES
 -- Indexes for table `devices`
 --
 ALTER TABLE `devices`
-  ADD PRIMARY KEY (`deviceId`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `roomFK` (`roomId`),
   ADD KEY `providerFK` (`providerId`);
 
@@ -178,19 +178,19 @@ ALTER TABLE `devices`
 -- Indexes for table `providers`
 --
 ALTER TABLE `providers`
-  ADD PRIMARY KEY (`providerId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`roomId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `routines`
 --
 ALTER TABLE `routines`
-  ADD PRIMARY KEY (`routineId`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `deviceFK` (`deviceId`),
   ADD KEY `userFK` (`userId`);
 
@@ -198,7 +198,7 @@ ALTER TABLE `routines`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users_devices`
@@ -215,31 +215,31 @@ ALTER TABLE `users_devices`
 -- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `deviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `providers`
 --
 ALTER TABLE `providers`
-  MODIFY `providerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `roomId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `routines`
 --
 ALTER TABLE `routines`
-  MODIFY `routineId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -249,22 +249,22 @@ ALTER TABLE `users`
 -- Constraints for table `devices`
 --
 ALTER TABLE `devices`
-  ADD CONSTRAINT `providerFK` FOREIGN KEY (`providerId`) REFERENCES `providers` (`providerId`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `roomFK` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`roomId`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `providerFK` FOREIGN KEY (`providerId`) REFERENCES `providers` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `roomFK` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `routines`
 --
 ALTER TABLE `routines`
-  ADD CONSTRAINT `deviceFK` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`deviceId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `userFK` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `deviceFK` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userFK` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users_devices`
 --
 ALTER TABLE `users_devices`
-  ADD CONSTRAINT `deviceId` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`deviceId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `deviceId` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
