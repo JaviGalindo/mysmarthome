@@ -32,7 +32,7 @@ CREATE TABLE `devices` (
   `name` varchar(255) NOT NULL,
   `roomId` int(11) DEFAULT NULL,
   `providerId` int(11) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0'
+  `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
