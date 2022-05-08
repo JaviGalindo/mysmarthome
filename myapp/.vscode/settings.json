@@ -1,0 +1,3 @@
+{
+    "jest.jestCommandLine": "node_modules\\.bin\\env-cmd -f .\\.env.local jest"
+}
