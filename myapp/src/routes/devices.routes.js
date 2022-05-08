@@ -1,21 +1,15 @@
 const router = require("express").Router();
-const {getAll, getById} = require("../controllers/common.controller");
+const {getAll, getById, deleteResource, updateResource, insertResource} = require("../controllers/common.controller");
 
   
 router.get("/", getAll);
 
 router.get("/:id", getById);
   
-router.post("/", (req, res) => {
-	return res.send("Received a POST HTTP method");
-});
+router.post("/", insertResource);
   
-router.put("/", (req, res) => {
-	return res.send("Received a PUT HTTP method");
-});
+router.put("/:id", updateResource);
   
-router.delete("/", (req, res) => {
-	return res.send("Received a DELETE HTTP method");
-});
+router.delete("/:id", deleteResource);
 
 module.exports = router;

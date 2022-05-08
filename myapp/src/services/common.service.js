@@ -1,6 +1,9 @@
 const {
 	queryAllRecords,
-	getRecordsById
+	getRecordsById,
+	insert,
+	update,
+	remove
 } = require("../databases/mysql.operations");
 
 
@@ -15,7 +18,22 @@ async function getResourceById(resource, id) {
 	return device;
 }
 
+async function insertResource(resource, data) {	
+	await insert(resource, data);
+}
+
+async function updateResource(resource, data, id) {
+	await update(resource, data, id);
+}
+
+async function deleteResource(resource, id) {
+	await remove(resource, id);
+}
+
 module.exports = {
 	getAll,
-	getResourceById
+	getResourceById,
+	insertResource,
+	updateResource,
+	deleteResource
 };
