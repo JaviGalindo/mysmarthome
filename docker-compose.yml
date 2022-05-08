@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      - $NODE_LOCAL_PORT:$SERVER_PORT
     environment:
       - DB_HOST=mysqldb
       - MYSQL_USER=$MYSQLDB_USER
