@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const {getDeviceById, getDevices} = require("../controllers/devices.controller");
+const {getAll, getById} = require("../controllers/common.controller");
 
   
-router.get("/", getDevices);
+router.get("/", getAll);
 
-router.get("/:id", getDeviceById);
+router.get("/:id", getById);
   
 router.post("/", (req, res) => {
 	return res.send("Received a POST HTTP method");

@@ -4,7 +4,7 @@
   "description": "An application to manage all your home devices",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon src/server.js",
     "local": "./node_modules/.bin/env-cmd -f ./.env.local nodemon --inspect src/server.js"
   },
@@ -28,6 +28,22 @@
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
-    "eslint": "^8.15.0"
+    "eslint": "^8.15.0",
+    "husky": "^7.0.4",
+    "jest": "^28.1.0",
+    "lint-staged": "^12.4.1",
+    "supertest": "^6.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "npm run test",
+      "git add"
+    ]
   }
 }

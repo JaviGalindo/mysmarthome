@@ -4,7 +4,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 const mysqlConnection = require("./databases/mysql");
 
-const {devices} = require("./routes");
+const {devices, rooms } = require("./routes");
 const app = express();
 app.use(
 	"/api-docs",
@@ -13,6 +13,7 @@ app.use(
 );
 
 app.use("/devices", devices);
+app.use("/rooms", rooms);
 
 app.listen(APPPort, async() => {
 	console.log(`Example app listening on port ${APPPort}!`);
