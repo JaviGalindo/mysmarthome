@@ -5,7 +5,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 const mysqlConnection = require("./databases/mysql");
 
-const {devices, rooms } = require("./routes");
+const {devices, rooms, routines, providers } = require("./routes");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,6 +19,9 @@ app.use(
 
 app.use("/devices", devices);
 app.use("/rooms", rooms);
+app.use("/routines", routines);
+app.use("/providers", providers);
+
 
 app.listen(APPPort, async() => {
 	console.log(`Example app listening on port ${APPPort}!`);
