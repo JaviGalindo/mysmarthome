@@ -19,7 +19,7 @@ async function getResourceById(resource, id) {
 }
 
 async function insertResource(resource, data) {	
-	await insert(resource, data);
+	return insert(resource, data);
 }
 
 async function updateResource(resource, data, id) {
@@ -27,7 +27,7 @@ async function updateResource(resource, data, id) {
 }
 
 async function deleteResource(resource, id) {
-	await remove(resource, id);
+	return remove(resource, id);
 }
 
 module.exports = {

@@ -1,38 +1,64 @@
 const commonService = require("../services/common.service");
 const {getResourceNameFromPath} = require("../utils");
 
+const findAndReturnResource = async (resource, id) =>{
+	const resources = await commonService.getResourceById(resource, id);
+	if(resources.length) {
+		return resources[0];
+	}
+	return undefined;
+};
+
 const getAll = async (req, res) => {
 	const resource = getResourceNameFromPath(req.baseUrl);
 
-	const devices = await commonService.getAll(resource);
-	return res.json(devices);
+	const resources = await commonService.getAll(resource);
+	res.set("Content-Range", `${resource} 0-24/${resources.length}`);
+	return res.json(resources);
 };
 
 const getById = async (req, res) => {
 	const resource = getResourceNameFromPath(req.baseUrl);
-	const devices = await commonService.getResourceById(resource, req.params.id);
-	return res.json(devices);
+	const id = req.params.id;
+	const found = await findAndReturnResource(resource, id);
+
+	if(found) {
+		return res.json(found);
+	}
+	return res.status(404).send("Not found");
 };
 
 const insertResource = async (req, res) => {
 	const resource = getResourceNameFromPath(req.baseUrl);
-	await commonService.insertResource(resource, req.body);
+	const newResourceId =await commonService.insertResource(resource, req.body);
 
-	return res.status(200).send("ok");
+	const found = await findAndReturnResource(resource, newResourceId);
+
+	if(found) {
+		return res.json(found);
+	}
+	return res.status(500).send(`Error creating ${resource} with id: ${found.id}`);
 };
 
 const updateResource = async (req, res) => {
 	const resource = getResourceNameFromPath(req.baseUrl);
 	await commonService.updateResource(resource, req.body, req.params.id);
+	const found = await findAndReturnResource(resource, req.params.id);
 
-	return res.status(200).send("ok");
+	if(found) {
+		return res.json(found);
+	}
+	return res.status(500).send(`Error updating ${resource} with id: ${found.id}`);
 };
 
 const deleteResource = async (req, res) => {
 	const resource = getResourceNameFromPath(req.baseUrl);
-	await commonService.deleteResource(resource, req.params.id);
-
-	return res.status(200).send("ok");
+	const id = req.params.id;
+	const isDeleted = await commonService.deleteResource(resource, id);
+	if(isDeleted) {
+		return res.status(200).json({"id": id});
+	}
+	return res.status(500).send(`Error deleting ${resource} with id: ${id}`);
 };
 module.exports = {
 	getById,

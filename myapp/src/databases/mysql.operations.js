@@ -37,8 +37,8 @@ async function update(table, data, id) {
 
 async function remove(table, id) {
 	const connection = await mysqlConnection();
-	console.log("removing deviceeeeeeeeeeeeeeee", id);
-	await connection.execute(`DELETE FROM ${table} WHERE id = ?`, [id]);
+	const [deleted] = await connection.execute(`DELETE FROM ${table} WHERE id = ?`, [id]);
+	return deleted.affectedRows>0;
 }
 
 module.exports = {
