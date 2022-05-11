@@ -24,8 +24,10 @@ const Dashboard = () => {
                 <div style={styles.leftCol}>
                     <div style={styles.flex}>
                         <Rooms />
+                        
                         <Spacer />
-                        <NewCustomers />
+                        <Rooms />
+                        
                     </div>
                 </div>
             </div>

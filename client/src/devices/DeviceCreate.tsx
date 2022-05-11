@@ -35,7 +35,7 @@ export const validateForm = (
     return errors;
 };
 
-const VisitorCreate = () => (
+const DeviceCreate = () => (
     <Create>
         <SimpleForm
             sx={{ maxWidth: 500 }}
@@ -113,4 +113,4 @@ const SectionTitle = ({ label }: { label: string }) => {
 
 const Separator = () => <Box pt="1em" />;
 
-export default VisitorCreate;
+export default DeviceCreate;

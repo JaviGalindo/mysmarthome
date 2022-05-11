@@ -1,6 +1,6 @@
 import simpleRestProvider from 'ra-data-simple-rest';
 
-const restProvider = simpleRestProvider('http://localhost:4000');
+const restProvider = simpleRestProvider('http://localhost:3001');
 
 const delayedDataProvider = new Proxy(restProvider, {
     get: (target, name, self) =>
@@ -10,9 +10,6 @@ const delayedDataProvider = new Proxy(restProvider, {
                   new Promise(resolve =>
                       setTimeout(
                           () => {
-                              if(resource === "rooms") {
-                                  resource= "reviews"
-                              }
                               resolve(
                                   restProvider[name as string](resource, params)
                               )

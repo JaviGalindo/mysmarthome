@@ -18,7 +18,7 @@ import {
 import { RichTextInput } from 'ra-input-rich-text';
 
 import { ProductEditDetails } from './ProductEditDetails';
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
+import CustomerReferenceField from '../devices/CustomerReferenceField';
 import StarRatingField from '../rooms/StarRatingField';
 import Poster from './Poster';
 import { Product } from '../types';

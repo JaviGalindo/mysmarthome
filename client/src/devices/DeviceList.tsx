@@ -1,24 +1,27 @@
 import * as React from 'react';
 import {
     BooleanField,
+    CreateButton,
     Datagrid,
     DateField,
     DateInput,
     List,
     NullableBooleanInput,
     NumberField,
+    ReferenceField,
     SearchInput,
+    TextField,
 } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
 
 import SegmentsField from './SegmentsField';
 import SegmentInput from './SegmentInput';
-import CustomerLinkField from './CustomerLinkField';
+import RoomLinkField from './RoomLinkField';
 import ColoredNumberField from './ColoredNumberField';
 import MobileGrid from './MobileGrid';
-import VisitorListAside from './VisitorListAside';
+import DeviceListAside from './DeviceListAside';
 
-const visitorFilters = [
+const deviceFilters = [
     <SearchInput source="q" alwaysOn />,
     <DateInput source="last_seen_gte" />,
     <NullableBooleanInput source="has_ordered" />,
@@ -26,17 +29,18 @@ const visitorFilters = [
     <SegmentInput source="groups" />,
 ];
 
-const VisitorList = () => {
+const DeviceList = () => {
     const isXsmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('sm')
     );
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <List
-            filters={isSmall ? visitorFilters : undefined}
-            sort={{ field: 'last_seen', order: 'DESC' }}
+            filters={isSmall ? deviceFilters : undefined}
+            sort={{ field: 'id', order: 'DESC' }}
+            actions={<CreateButton/ >}
             perPage={25}
-            aside={<VisitorListAside />}
+            aside={<DeviceListAside />}
         >
             {isXsmall ? (
                 <MobileGrid />
@@ -51,24 +55,16 @@ const VisitorList = () => {
                         },
                     }}
                 >
-                    <CustomerLinkField />
-                    <DateField source="last_seen" />
-                    <NumberField
-                        source="nb_commands"
-                        label="resources.customers.fields.commands"
-                        sx={{ color: 'purple' }}
-                    />
-                    <ColoredNumberField
-                        source="total_spent"
-                        options={{ style: 'currency', currency: 'USD' }}
-                    />
-                    <DateField source="latest_purchase" showTime />
-                    <BooleanField source="has_newsletter" label="News." />
-                    <SegmentsField source="groups" />
+                    <TextField source="id" />
+                    <TextField source="name" />
+                    <TextField source="active" />
+                    <ReferenceField source="roomId" reference="rooms">
+                        <TextField source="name"/>
+                    </ReferenceField>
                 </Datagrid>
             )}
         </List>
     );
 };
 
-export default VisitorList;
+export default DeviceList;

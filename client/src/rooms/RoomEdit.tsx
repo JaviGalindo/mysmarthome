@@ -4,17 +4,12 @@ import {
     useTranslate,
     TextInput,
     SimpleForm,
-    DateField,
     EditProps,
     Labeled,
 } from 'react-admin';
 import { Box, Grid, Stack, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-import ProductReferenceField from '../products/ProductReferenceField';
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
-import StarRatingField from './StarRatingField';
-import RoomsEditToolbar from './RoomsEditToolbar';
 import { Room } from '../types';
 
 interface Props extends EditProps<Room> {
@@ -36,36 +31,15 @@ const RoomsEdit = ({ onCancel, ...props }: Props) => {
                 </Stack>
                 <SimpleForm
                     sx={{ pt: 0, pb: 0 }}
-                    toolbar={<RoomsEditToolbar />}
                 >
                     <Grid container rowSpacing={1} mb={1}>
                         <Grid item xs={6}>
                             <Labeled>
-                                <CustomerReferenceField />
-                            </Labeled>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Labeled>
-                                <ProductReferenceField />
-                            </Labeled>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Labeled>
-                                <DateField source="date" />
-                            </Labeled>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Labeled>
-                                <StarRatingField />
+                                <TextInput source="name" />
                             </Labeled>
                         </Grid>
                     </Grid>
-                    <TextInput
-                        source="comment"
-                        maxRows={15}
-                        multiline
-                        fullWidth
-                    />
+
                 </SimpleForm>
             </Box>
         </EditBase>

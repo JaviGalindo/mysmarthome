@@ -1,8 +1,8 @@
-import RoomIcon from '@mui/icons-material/Comment';
+import RoomPreferences from '@mui/icons-material/RoomPreferences';
 import RoomCreate from './RoomCreate';
 import RoomList from './RoomList';
 const Room =  {
-    icon: RoomIcon,
+    icon: RoomPreferences,
     list: RoomList,
     create: RoomCreate,
 };

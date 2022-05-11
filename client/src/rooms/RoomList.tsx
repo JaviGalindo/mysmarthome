@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { List } from 'react-admin';
+import { CreateButton, List } from 'react-admin';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { Box, Drawer, useMediaQuery, Theme } from '@mui/material';
+import { Box, Drawer } from '@mui/material';
 
-import RoomListMobile from './RoomListMobile';
 import RoomListDesktop from './RoomListDesktop';
-import roomFilters from './roomFilters';
+//import roomFilters from './roomFilters';
 import RoomEdit from './RoomEdit';
 
 const RoomList = () => {
-    const isXSmall = useMediaQuery<Theme>(theme =>
-        theme.breakpoints.down('sm')
-    );
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -33,13 +30,12 @@ const RoomList = () => {
                         }),
                     marginRight: !!match ? '400px' : 0,
                 }}
-                filters={roomFilters}
+                //filters={roomFilters}
+                actions={<CreateButton/ >}
                 perPage={25}
                 sort={{ field: 'date', order: 'DESC' }}
             >
-                {isXSmall ? (
-                    <RoomListMobile />
-                ) : (
+               
                     <RoomListDesktop
                         selectedRow={
                             !!match
@@ -47,7 +43,7 @@ const RoomList = () => {
                                 : undefined
                         }
                     />
-                )}
+                
             </List>
             <Drawer
                 variant="persistent"

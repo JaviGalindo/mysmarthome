@@ -22,8 +22,8 @@ import {
 import { useMediaQuery, Divider, Tabs, Tab, Theme } from '@mui/material';
 
 import NbItemsField from './NbItemsField';
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
-import AddressField from '../visitors/AddressField';
+import CustomerReferenceField from '../devices/CustomerReferenceField';
+import AddressField from '../devices/AddressField';
 import MobileGrid from './MobileGrid';
 import { Customer } from '../types';
 

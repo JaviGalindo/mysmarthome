@@ -2,37 +2,24 @@ import * as React from 'react';
 import {
     Identifier,
     Datagrid,
-    DateField,
     TextField,
-    BulkDeleteButton,
 } from 'react-admin';
 
-import ProductReferenceField from '../products/ProductReferenceField';
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
-import StarRatingField from './StarRatingField';
+
 import rowStyle from './rowStyle';
 
-import BulkAcceptButton from './BulkAcceptButton';
-import BulkRejectButton from './BulkRejectButton';
 
 export interface RoomListDesktopProps {
     selectedRow?: Identifier;
 }
 
-const RoomsBulkActionButtons = () => (
-    <>
-        <BulkAcceptButton />
-        <BulkRejectButton />
-        <BulkDeleteButton />
-    </>
-);
+
 
 const RoomListDesktop = ({ selectedRow }: RoomListDesktopProps) => (
     <Datagrid
         rowClick="edit"
         rowStyle={rowStyle(selectedRow)}
         optimized
-        bulkActionButtons={<RoomsBulkActionButtons />}
         sx={{
             '& .RaDatagrid-thead': {
                 borderLeftColor: 'transparent',
@@ -47,12 +34,8 @@ const RoomListDesktop = ({ selectedRow }: RoomListDesktopProps) => (
             },
         }}
     >
-        <DateField source="date" />
-        <CustomerReferenceField link={false} />
-        <ProductReferenceField link={false} />
-        <StarRatingField size="small" />
-        <TextField source="comment" />
-        <TextField source="status" />
+        <TextField source="id" />
+        <TextField source="name"/>
     </Datagrid>
 );
 

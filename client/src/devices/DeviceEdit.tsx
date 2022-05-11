@@ -13,12 +13,12 @@ import { Grid, Box, Typography } from '@mui/material';
 import Aside from './Aside';
 import FullNameField from './FullNameField';
 import SegmentsInput from './SegmentsInput';
-import { validateForm } from './VisitorCreate';
+import { validateForm } from './DeviceCreate';
 
-const VisitorEdit = () => {
+const DeviceEdit = () => {
     const translate = useTranslate();
     return (
-        <Edit title={<VisitorTitle />} aside={<Aside />}>
+        <Edit title={<DeviceTitle />} aside={<Aside />}>
             <SimpleForm validate={validateForm}>
                 <div>
                     <Grid container width={{ xs: '100%', xl: 800 }} spacing={2}>
@@ -140,6 +140,6 @@ const VisitorEdit = () => {
     );
 };
 
-const VisitorTitle = () => <FullNameField size="32" sx={{ margin: '5px 0' }} />;
+const DeviceTitle = () => <FullNameField size="32" sx={{ margin: '5px 0' }} />;
 
-export default VisitorEdit;
+export default DeviceEdit;
