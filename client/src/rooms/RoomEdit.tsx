@@ -34,6 +34,7 @@ const RoomsEdit = ({ onCancel, ...props }: Props) => {
                 >
                     <Grid container rowSpacing={1} mb={1}>
                         <Grid item xs={6}>
+                        <TextInput disabled source="id" />
                             <Labeled>
                                 <TextInput source="name" />
                             </Labeled>
