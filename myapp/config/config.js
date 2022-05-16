@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 module.exports = {
-	"APPPort": process.env.SERVER_PORT,
+	"APPPort": process.env.API_PORT,
 	"mysql" : {
 		"host": process.env.MYSQLDB_HOST,
 		"user": process.env.MYSQLDB_USER,

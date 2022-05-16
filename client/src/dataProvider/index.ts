@@ -33,10 +33,6 @@ const getDataProvider = async (type: string): Promise<DataProvider> => {
      * To avoid bundling both libraries, the dataProvider and fake server factories
      * use the import() function, so they are asynchronous.
      */
-    if (type === 'graphql') {
-        console.log("EHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-        return import('./graphql').then(factory => factory.default());
-    }
     return import('./rest').then(provider => provider.default);
 };
 

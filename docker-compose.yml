@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$SERVER_PORT
+      - $API_PORT:$API_PORT
     environment:
       - MYSQLDB_USER=$MYSQLDB_USER
       - MYSQLDB_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
@@ -54,23 +54,24 @@ services:
       - mysqldb
     ports:
       - 8081:80
-  # client:
-  #   depends_on:
-  #     - app
-  #   build: ./client
-  #   restart: unless-stopped
-  #   env_file: ./.env
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - DB_HOST=mysqldb
-  #     - REACT_APP_API_URL=$REACT_APP_API_URL
-  #     - REACT_APP_PUBLIC_VAPID_KEY=$REACT_APP_PUBLIC_VAPID_KEY
-  #     - SKIP_PREFLIGHT_CHECK=$SKIP_PREFLIGHT_CHECK
-  #     - API_URL=$API_URL
-  #     - API_PORT=$API_PORT
-  #   stdin_open: true
-  #   tty: true
+  client:
+    depends_on:
+      - app
+    build: ./client
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=mysqldb
+      - REACT_APP_API_URL=$REACT_APP_API_URL
+      - REACT_APP_PUBLIC_VAPID_KEY=$REACT_APP_PUBLIC_VAPID_KEY
+      - SKIP_PREFLIGHT_CHECK=$SKIP_PREFLIGHT_CHECK
+      - API_URL=$API_URL
+      - NODE_ENV=test
+      - API_PORT=$API_PORT
+    stdin_open: true
+    tty: true
 
 volumes: 
   db:
