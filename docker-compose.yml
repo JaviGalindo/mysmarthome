@@ -9,35 +9,35 @@ services:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
-      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+      - $MYSQLDB_PORT:$MYSQLDB_PORT
     volumes:
       - db:/var/lib/mysql
       - ./myapp/db/mysmarthomeStructureAndData.sql:/docker-entrypoint-initdb.d/schema.sql:ro
-  mongo:
-    image: mongo
-    ports:
-      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
-    volumes:
-      - mongodb:/data/db
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+  #   volumes:
+  #     - mongodb:/data/db
   app:
     depends_on:
       - mysqldb
-      - mongo
+      # - mongo
     build: ./myapp
     restart: unless-stopped
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$SERVER_PORT
     environment:
-      - DB_HOST=mysqldb
-      - MYSQL_USER=$MYSQLDB_USER
-      - MYSQL_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - MYSQL_NAME=$MYSQLDB_DATABASE
-      - MYSQL_PORT=$MYSQLDB_DOCKER_PORT
-      - MONGO_USER=$MONGODB_USER
-      - MONGO_PASSWORD=$MONGODB_ROOT_PASSWORD
-      - MONGO_NAME=$MONGODB_DATABASE
-      - MONGO_PORT=$MONGODB_DOCKER_PORT
+      - MYSQLDB_USER=$MYSQLDB_USER
+      - MYSQLDB_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQLDB_DATABASE=$MYSQLDB_DATABASE
+      - MYSQLDB_PORT=$MYSQLDB_PORT
+      - MYSQLDB_HOST=$MYSQLDB_HOST
+      - MONGODB_USER=$MONGODB_USER
+      - MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD
+      - MONGODB_DATABASE=$MONGODB_DATABASE
+      - MONGODB_PORT=$MONGODB_PORT
     stdin_open: true
     tty: true
   phpmyadmin:
@@ -47,14 +47,31 @@ services:
       - mysqldb
     environment:
       PMA_HOST: mysqldb
-      PMA_PORT: $MYSQLDB_DOCKER_PORT
+      PMA_PORT: $MYSQLDB_PORT
       PMA_ARBITRARY: 1
     restart: always
     depends_on:
       - mysqldb
     ports:
       - 8081:80
+  # client:
+  #   depends_on:
+  #     - app
+  #   build: ./client
+  #   restart: unless-stopped
+  #   env_file: ./.env
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - DB_HOST=mysqldb
+  #     - REACT_APP_API_URL=$REACT_APP_API_URL
+  #     - REACT_APP_PUBLIC_VAPID_KEY=$REACT_APP_PUBLIC_VAPID_KEY
+  #     - SKIP_PREFLIGHT_CHECK=$SKIP_PREFLIGHT_CHECK
+  #     - API_URL=$API_URL
+  #     - API_PORT=$API_PORT
+  #   stdin_open: true
+  #   tty: true
 
 volumes: 
   db:
-  mongodb:
+  # mongodb:
