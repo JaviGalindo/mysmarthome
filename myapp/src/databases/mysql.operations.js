@@ -13,6 +13,12 @@ async function getRecordsById(table, id, fields = "*") {
 	return results;
 }
 
+async function getByField(table, fieldValue, field, fields = "*") {
+	const connection = await mysqlConnection();
+	const [results] =  await connection.execute(`SELECT ${fields} FROM ${table} WHERE ${field} = ?`, [fieldValue]);
+	return results;
+}
+
 async function insert(table, data) {
 	const connection = await mysqlConnection();
 
@@ -44,6 +50,7 @@ async function remove(table, id) {
 module.exports = {
 	queryAllRecords,
 	getRecordsById,
+	getByField,
 	insert,
 	update,
 	remove
