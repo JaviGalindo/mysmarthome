@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysqldb:3306
--- Generation Time: May 07, 2022 at 10:58 AM
--- Server version: 5.7.37
--- PHP Version: 8.0.15
+-- Generation Time: May 17, 2022 at 03:22 PM
+-- Server version: 5.7.38
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 -- Database: `mysmarthome`
 --
 USE `mysmarthome`;
+
 -- --------------------------------------------------------
 
 --
@@ -32,22 +33,34 @@ CREATE TABLE `devices` (
   `name` varchar(255) NOT NULL,
   `roomId` int(11) DEFAULT NULL,
   `providerId` int(11) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
+  `config` json DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `devices`
 --
 
-INSERT INTO `devices` (`id`, `name`, `roomId`, `providerId`, `active`) VALUES
-(1, 'Speaker bedroom', NULL, 1, 0),
-(2, 'Speaker kitchen', 3, 1, 1),
-(3, 'Plug 1', NULL, 1, 1),
-(4, 'Camera Garden', 6, 1, 0),
-(5, 'Strip Lights', 4, 1, 1),
-(6, 'Doorbell', 7, 1, 1),
-(7, 'Bulb', 1, 2, 1),
-(8, 'Plug living room', 4, 2, 1);
+INSERT INTO `devices` (`id`, `name`, `roomId`, `providerId`, `config`, `active`) VALUES
+(2, 'Camera', NULL, 3, NULL, 1),
+(3, 'Plug 1', NULL, 1, NULL, 1),
+(4, 'Camera Garden', 6, 1, NULL, 0),
+(5, 'Strip Lights', 4, 1, NULL, 1),
+(6, 'Doorbell', 7, 1, NULL, 1),
+(7, 'Bulb', NULL, 2, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `deviceId` int(11) NOT NULL,
+  `config` json DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -59,7 +72,7 @@ CREATE TABLE `providers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `SSO` mediumtext,
-  `connection` int(11) DEFAULT NULL
+  `connection` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -68,7 +81,8 @@ CREATE TABLE `providers` (
 
 INSERT INTO `providers` (`id`, `name`, `SSO`, `connection`) VALUES
 (1, 'Amazon', NULL, NULL),
-(2, 'Google', NULL, NULL);
+(2, 'Google', NULL, NULL),
+(3, 'Local', NULL, 'http://192.168.0.38:9000');
 
 -- --------------------------------------------------------
 
@@ -86,13 +100,12 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `name`) VALUES
-(1, 'Main Bedroom'),
 (2, 'Studio'),
-(3, 'Kitchen'),
 (4, 'Living room'),
-(5, 'Landing'),
-(6, 'Garden'),
-(7, 'Front Door');
+(5, 'Landinsg'),
+(6, 'Gardens'),
+(7, 'Front Door'),
+(8, 'my room');
 
 -- --------------------------------------------------------
 
@@ -113,7 +126,8 @@ CREATE TABLE `routines` (
 --
 
 INSERT INTO `routines` (`id`, `userId`, `deviceId`, `name`, `schedule`) VALUES
-(1, 2, 5, 'Switch off strip lights everyday at 23', '0 23 * * *');
+(1, 1, 5, 'Switch off strip lights everyday at 23', '0 23 * * *'),
+(3, 1, 3, 'Switch on Plug 1 everyday at 23', '0 9 * * *');
 
 -- --------------------------------------------------------
 
@@ -133,9 +147,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `active`) VALUES
-(1, 'yackroyd0', 'mcrowdace0@amazon.com', 1),
-(2, 'ahumfrey1', 'yadolthine1@live.com', 1),
-(3, 'amiller1', 'amiller@live.com', 0);
+(1, 'Admin', 'admin@admin.com', 1);
 
 -- --------------------------------------------------------
 
@@ -153,14 +165,12 @@ CREATE TABLE `users_devices` (
 --
 
 INSERT INTO `users_devices` (`userId`, `deviceId`) VALUES
-(1, 1),
 (1, 2),
 (1, 3),
 (1, 4),
-(2, 5),
-(2, 6),
-(2, 7),
-(2, 8);
+(1, 5),
+(1, 6),
+(1, 7);
 
 --
 -- Indexes for dumped tables
@@ -173,6 +183,14 @@ ALTER TABLE `devices`
   ADD PRIMARY KEY (`id`),
   ADD KEY `roomFK` (`roomId`),
   ADD KEY `providerFK` (`providerId`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userIdFK` (`userId`),
+  ADD KEY `deviceIdFK` (`deviceId`);
 
 --
 -- Indexes for table `providers`
@@ -215,25 +233,31 @@ ALTER TABLE `users_devices`
 -- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `providers`
 --
 ALTER TABLE `providers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `routines`
 --
 ALTER TABLE `routines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -251,6 +275,13 @@ ALTER TABLE `users`
 ALTER TABLE `devices`
   ADD CONSTRAINT `providerFK` FOREIGN KEY (`providerId`) REFERENCES `providers` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `roomFK` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `deviceIdFK` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userIdFK` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `routines`
