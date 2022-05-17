@@ -64,12 +64,12 @@ services:
       - 3000:3000
     environment:
       - DB_HOST=mysqldb
-      - REACT_APP_API_URL=$REACT_APP_API_URL
+      - REACT_APP_SUBSCRIPTION_URL=$REACT_APP_API_URL
       - REACT_APP_PUBLIC_VAPID_KEY=$REACT_APP_PUBLIC_VAPID_KEY
       - SKIP_PREFLIGHT_CHECK=$SKIP_PREFLIGHT_CHECK
-      - API_URL=$API_URL
+      - REACT_APP_API_URL=$API_URL
       - NODE_ENV=test
-      - API_PORT=$API_PORT
+      - REACT_APP_API_PORT=$API_PORT
     stdin_open: true
     tty: true
 

@@ -36,6 +36,7 @@ const fetchJson = (url:string, options:any = {}) => {
     // add your own headers here
     return fetchUtils.fetchJson(url, options);
 }
+console.log(process.env.REACT_APP_API_URL, process.env.REACT_APP_API_PORT)
 
 const restProvider = simpleRestProvider('http://localhost:3001', fetchJson);
 
