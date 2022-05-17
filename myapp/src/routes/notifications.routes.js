@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const {getAll, getById, deleteResource, updateResource, insertResource} = require("../controllers/common.controller");
-const {getByAuth} = require("../controllers/common.controller");
+const { getByAuth } = require("../controllers/notifications.controller");
+
 
   
 router.get("/", getAll);
