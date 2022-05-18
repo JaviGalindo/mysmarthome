@@ -8,7 +8,7 @@ router.get("/", getAll);
 
 router.get("/:id", getById);
 
-router.get("/:auth", getByAuth);
+router.get("/auth/:auth", getByAuth);
 
 router.post("/", insertResource);
   
