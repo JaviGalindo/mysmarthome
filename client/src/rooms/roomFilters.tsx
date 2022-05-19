@@ -6,7 +6,7 @@ import {
     SearchInput,
     SelectInput,
 } from 'react-admin';
-import { Customer } from '../types';
+import { User } from '../types';
 
 const roomFilters = [
     <SearchInput source="q" alwaysOn />,
@@ -20,7 +20,7 @@ const roomFilters = [
     />,
     <ReferenceInput source="customer_id" reference="customers">
         <AutocompleteInput
-            optionText={(choice?: Customer) =>
+            optionText={(choice?: User) =>
                 choice?.id // the empty choice is { id: '' }
                     ? `${choice.first_name} ${choice.last_name}`
                     : ''

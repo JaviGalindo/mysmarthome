@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useRecordContext } from 'react-admin';
-import { Customer } from '../types';
+import { User } from '../types';
 
 const AddressField = () => {
-    const record = useRecordContext<Customer>();
+    const record = useRecordContext<User>();
 
     return record ? (
         <span>

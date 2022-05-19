@@ -4,16 +4,16 @@ import { memo } from 'react';
 
 import { FieldProps, useRecordContext } from 'react-admin';
 import AvatarField from './AvatarField';
-import { Customer } from '../types';
+import { User } from '../types';
 
-interface Props extends FieldProps<Customer> {
+interface Props extends FieldProps<User> {
     size?: string;
     sx?: SxProps;
 }
 
 const FullNameField = (props: Props) => {
     const { size } = props;
-    const record = useRecordContext<Customer>();
+    const record = useRecordContext<User>();
     return record ? (
         <Typography
             variant="body2"

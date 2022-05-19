@@ -15,7 +15,7 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import { Card, CardContent, Box, Grid, Typography, Link } from '@mui/material';
 
-import { Order, Customer } from '../types';
+import { Order, User } from '../types';
 import Basket from './Basket';
 import Totals from './Totals';
 
@@ -38,7 +38,7 @@ const OrderTitle = () => {
 };
 
 const CustomerDetails = () => {
-    const record = useRecordContext<Customer>();
+    const record = useRecordContext<User>();
     return (
         <div>
             <Typography
@@ -62,7 +62,7 @@ const CustomerDetails = () => {
 };
 
 const CustomerAddress = () => {
-    const record = useRecordContext<Customer>();
+    const record = useRecordContext<User>();
     return (
         <div>
             <Typography>

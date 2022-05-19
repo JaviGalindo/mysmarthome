@@ -8,8 +8,9 @@ import {
     useSidebarState,
 } from 'react-admin';
 
-import visitors from '../devices';
+import devices from '../devices';
 import rooms from '../rooms';
+import users from '../users';
 
 
 const Menu = ({ dense = false }: MenuProps) => {
@@ -43,7 +44,16 @@ const Menu = ({ dense = false }: MenuProps) => {
                 to="/devices"
                 state={{ _scrollToTop: true }}
                 primaryText="Devices"
-                leftIcon={<visitors.icon />}
+                leftIcon={<devices.icon />}
+                dense={dense}
+            />
+
+
+            <MenuItemLink
+                to="/users"
+                state={{ _scrollToTop: true }}
+                primaryText="Users"
+                leftIcon={<users.icon />}
                 dense={dense}
             />
 

@@ -18,23 +18,11 @@ export interface Product extends RaRecord {
     width: number;
 }
 
-export interface Customer extends RaRecord {
-    first_name: string;
-    last_name: string;
-    address: string;
-    stateAbbr: string;
-    city: string;
-    zipcode: string;
-    avatar: string;
-    birthday: string;
-    first_seen: string;
-    last_seen: string;
-    has_ordered: boolean;
-    latest_purchase: string;
-    has_newsletter: boolean;
-    groups: string[];
-    nb_commands: number;
-    total_spent: number;
+export interface User extends RaRecord {
+    id: Identifier;
+    username: string;
+    email: string;
+    active: boolean;
 }
 
 export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';
@@ -60,6 +48,22 @@ export interface Room extends RaRecord {
     status: RoomStatus;
     customer_id: Identifier;
     product_id: Identifier;
+}
+
+
+
+export interface Notification extends RaRecord {
+    id: Identifier;
+    deviceId: String;
+    config: Object;
+    subscriptionaAuth: string;
+}
+export interface Device extends RaRecord {
+    id: Identifier;
+    name: String;
+    roomId: Identifier;
+    config: Object;
+    active: boolean;
 }
 
 declare global {

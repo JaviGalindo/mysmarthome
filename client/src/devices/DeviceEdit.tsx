@@ -1,145 +1,59 @@
 import * as React from 'react';
 import {
-    DateInput,
     Edit,
     NullableBooleanInput,
     TextInput,
-    PasswordInput,
     SimpleForm,
-    useTranslate,
+    ReferenceInput,
+    SelectInput,
+    CreateButton
 } from 'react-admin';
 import { Grid, Box, Typography } from '@mui/material';
+import Notifications from './Notifications';
 
-import Aside from './Aside';
-import FullNameField from './FullNameField';
-import SegmentsInput from './SegmentsInput';
-import { validateForm } from './DeviceCreate';
+// import Aside from './Aside';
+// const { JsonInput } = require('@bb-tech/ra-components');
+const Spacer = () => <Box m={1}>&nbsp;</Box>;
 
 const DeviceEdit = () => {
-    const translate = useTranslate();
     return (
-        <Edit title={<DeviceTitle />} aside={<Aside />}>
-            <SimpleForm validate={validateForm}>
+        // <Edit title="Edit Device" aside={<Aside />}>
+        <Edit title="Edit Device" >
+            <SimpleForm>
                 <div>
-                    <Grid container width={{ xs: '100%', xl: 800 }} spacing={2}>
-                        <Grid item xs={12} md={8}>
-                            <Typography variant="h6" gutterBottom>
-                                {translate(
-                                    'resources.customers.fieldGroups.identity'
-                                )}
-                            </Typography>
-                            <Box display={{ xs: 'block', sm: 'flex' }}>
-                                <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                                    <TextInput
-                                        source="first_name"
-                                        isRequired
-                                        fullWidth
-                                    />
-                                </Box>
-                                <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                                    <TextInput
-                                        source="last_name"
-                                        isRequired
-                                        fullWidth
-                                    />
-                                </Box>
-                            </Box>
-                            <TextInput
-                                type="email"
-                                source="email"
-                                isRequired
-                                fullWidth
-                            />
-                            <Box display={{ xs: 'block', sm: 'flex' }}>
-                                <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                                    <DateInput
-                                        source="birthday"
-                                        fullWidth
-                                        helperText={false}
-                                    />
-                                </Box>
-                                <Box flex={2} ml={{ xs: 0, sm: '0.5em' }} />
-                            </Box>
+                    <Typography variant="h6" gutterBottom>
+                        Edit Device
+                    </Typography>
+                    <Grid container >
 
-                            <Box mt="1em" />
 
-                            <Typography variant="h6" gutterBottom>
-                                {translate(
-                                    'resources.customers.fieldGroups.address'
-                                )}
-                            </Typography>
-                            <TextInput
-                                source="address"
-                                multiline
-                                fullWidth
-                                helperText={false}
-                            />
-                            <Box display={{ xs: 'block', sm: 'flex' }}>
-                                <Box flex={2} mr={{ xs: 0, sm: '0.5em' }}>
-                                    <TextInput
-                                        source="city"
-                                        fullWidth
-                                        helperText={false}
-                                    />
-                                </Box>
-                                <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                                    <TextInput
-                                        source="stateAbbr"
-                                        fullWidth
-                                        helperText={false}
-                                    />
-                                </Box>
-                                <Box flex={2}>
-                                    <TextInput
-                                        source="zipcode"
-                                        fullWidth
-                                        helperText={false}
-                                    />
-                                </Box>
-                            </Box>
-
-                            <Box mt="1em" />
-
-                            <Typography variant="h6" gutterBottom>
-                                {translate(
-                                    'resources.customers.fieldGroups.change_password'
-                                )}
-                            </Typography>
-                            <Box display={{ xs: 'block', sm: 'flex' }}>
-                                <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                                    <PasswordInput
-                                        source="password"
-                                        fullWidth
-                                    />
-                                </Box>
-                                <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                                    <PasswordInput
-                                        source="confirm_password"
-                                        fullWidth
-                                    />
-                                </Box>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <Typography variant="h6" gutterBottom>
-                                {translate(
-                                    'resources.customers.fieldGroups.stats'
-                                )}
-                            </Typography>
-
-                            <SegmentsInput fullWidth />
-                            <NullableBooleanInput
-                                fullWidth
-                                source="has_newsletter"
-                            />
-                        </Grid>
+                        <TextInput
+                            source="name"
+                            isRequired
+                            fullWidth
+                        />
+                        {/* <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+                                    <JsonInput source="config" multiline />
+                                </Box> */}
+                        <ReferenceInput source="roomId" reference="rooms">
+                            <SelectInput source="name" fullWidth defaultValue={null} />
+                        </ReferenceInput>
+                        <NullableBooleanInput
+                            fullWidth
+                            format={value => value === 1 ? true : false}
+                            source="active"
+                        />
+                        {/* <CreateButton LinkComponent={NotificationsCreate} resource="notifications" label="Create new notification config"/> */}
                     </Grid>
+                </div>
+                <div>
+                    <Notifications />
                 </div>
             </SimpleForm>
         </Edit>
     );
 };
 
-const DeviceTitle = () => <FullNameField size="32" sx={{ margin: '5px 0' }} />;
+
 
 export default DeviceEdit;

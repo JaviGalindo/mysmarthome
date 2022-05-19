@@ -5,37 +5,41 @@ import {
     SimpleForm,
     EditProps,
     Labeled,
+    SaveButton,
+    Toolbar
 } from 'react-admin';
 import { Box, Grid, Stack, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Room } from '../types';
+import { User } from '../types';
 
-interface Props extends EditProps<Room> {
+interface Props extends EditProps<User> {
     onCancel: () => void;
 }
+const PostEditToolbar = (props: any) => (
+    <Toolbar {...props} >
+        <SaveButton />
+    </Toolbar>
+);
 
-const RoomsEdit = ({ onCancel, ...props }: Props) => {
+const UserEdit = ({ onCancel, ...props }: Props) => {
     return (
         <EditBase {...props}>
             <Box pt={5} width={{ xs: '100vW', sm: 400 }} mt={{ xs: 2, sm: 1 }}>
                 <Stack direction="row" p={2}>
                     <Typography variant="h6" flex="1">
-                        Edit Room
+                        Edit User
                     </Typography>
-                    <IconButton onClick={onCancel} size="small">
-                        <CloseIcon />
-                    </IconButton>
                 </Stack>
-                <SimpleForm
+                <SimpleForm toolbar={<PostEditToolbar />}
                     sx={{ pt: 0, pb: 0 }}
+
                 >
                     <Grid container rowSpacing={1} mb={1}>
                         <Grid item xs={6}>
-                        <TextInput disabled source="id" />
-                            <Labeled>
-                                <TextInput source="name" />
-                            </Labeled>
+                            <TextInput disabled source="id" />
+                            <TextInput disabled source="username" />
+                            <TextInput source="email" />
                         </Grid>
                     </Grid>
 
@@ -45,4 +49,4 @@ const RoomsEdit = ({ onCancel, ...props }: Props) => {
     );
 };
 
-export default RoomsEdit;
+export default UserEdit;

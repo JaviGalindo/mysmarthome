@@ -23,7 +23,6 @@ const authProvider: AuthProvider = {
         })
         .then(response => response.json())
         .then((userData:any) => {
-            debugger;
             return Promise.resolve({
                 id: userData.id,
                 fullName: userData.username,

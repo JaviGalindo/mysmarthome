@@ -31,11 +31,11 @@ import StarRatingField from '../rooms/StarRatingField';
 import {
     Order as OrderRecord,
     Room as RoomRecord,
-    Customer,
+    User,
 } from '../types';
 
 const Aside = () => {
-    const record = useRecordContext<Customer>();
+    const record = useRecordContext<User>();
     return (
         <Box width={400} display={{ xs: 'none', lg: 'block' }}>
             {record && <EventList />}
@@ -44,7 +44,7 @@ const Aside = () => {
 };
 
 const EventList = () => {
-    const record = useRecordContext<Customer>();
+    const record = useRecordContext<User>();
     const translate = useTranslate();
     const [locale] = useLocaleState();
 

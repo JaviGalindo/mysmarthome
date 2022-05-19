@@ -13,11 +13,11 @@ import {
 import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
-import { Customer } from '../types';
+import { User } from '../types';
 
 const MobileGrid = () => {
     const translate = useTranslate();
-    const { data, isLoading } = useListContext<Customer>();
+    const { data, isLoading } = useListContext<User>();
 
     if (isLoading || data.length === 0) {
         return null;

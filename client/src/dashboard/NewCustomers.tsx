@@ -14,7 +14,7 @@ import { useTranslate, useGetList } from 'react-admin';
 import { subDays } from 'date-fns';
 
 import CardWithIcon from './CardWithIcon';
-import { Customer } from '../types';
+import { User } from '../types';
 
 const NewCustomers = () => {
     const translate = useTranslate();
@@ -26,7 +26,7 @@ const NewCustomers = () => {
     aMonthAgo.setSeconds(0);
     aMonthAgo.setMilliseconds(0);
 
-    const { isLoading, data: visitors } = useGetList<Customer>('customers', {
+    const { isLoading, data: visitors } = useGetList<User>('customers', {
         filter: {
             has_ordered: true,
             first_seen_gte: aMonthAgo.toISOString(),
@@ -45,7 +45,7 @@ const NewCustomers = () => {
         >
             <List sx={{ display: isLoading ? 'none' : 'block' }}>
                 {visitors
-                    ? visitors.map((record: Customer) => (
+                    ? visitors.map((record: User) => (
                           <ListItem
                               button
                               to={`/customers/${record.id}`}

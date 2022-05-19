@@ -6,49 +6,37 @@ import {
     ListItem,
     ListItemText,
 } from '@mui/material';
-import RoomIcon from '@mui/icons-material/RoomPreferences';
+import DevicesIcon from '@mui/icons-material/Devices';
 import { Link } from 'react-router-dom';
 
 import {
     useGetList,
-    useIsDataLoaded,
 } from 'react-admin';
 
 import CardWithIcon from './CardWithIcon';
-//import StarRatingField from '../rooms/StarRatingField';
-import { Room } from '../types';
+import { Device } from '../types';
 
-const Rooms = () => {
-    const { data: rooms, total, isLoading } = useGetList<Room>('rooms', {
+const Devices = () => {
+    const { data: rooms, total } = useGetList<Device>('devices', {
         filter: { status: 'pending' },
         sort: { field: 'date', order: 'DESC' },
         pagination: { page: 1, perPage: 100 },
     });
 
-    // Poor man's Suspense: hide the content until all the data is loaded,
-    // including the reference customers.
-    // As ReferenceField aggregates the calls to reference customers,
-    // if the first customer is loaded, then all the customers are loaded.
-    // const isCustomerDataLoaded = useIsDataLoaded(
-    //     ['customers', 'getMany', { ids: [String(rooms?.[0].customer_id)] }],
-    //     { enabled: !isLoading && rooms && rooms.length > 0 }
-    // );
-    // const display = isLoading || !isCustomerDataLoaded ? 'none' : 'block';
-
     return (
         <CardWithIcon
-            to="/Rooms"
-            icon={RoomIcon}
-            title="ROOMS"
+            to="/Devices"
+            icon={DevicesIcon}
+            title="DEVICES"
             subtitle={total}
         >
             <List>
-                {rooms?.map((record: Room) => (
+                {rooms?.map((record: Device) => (
                     <ListItem
                         key={record.id}
                         button
                         component={Link}
-                        to={`/Rooms/${record.id}`}
+                        to={`/Devices/${record.id}`}
                         alignItems="flex-start"
                     >
                         <ListItemText
@@ -64,16 +52,16 @@ const Rooms = () => {
             <Button
                 sx={{ borderRadius: 0 }}
                 component={Link}
-                to="/Rooms"
+                to="/Devices"
                 size="small"
                 color="primary"
             >
                 <Box p={1} sx={{ color: 'primary.main' }}>
-                    All Rooms
+                    All Devices
                 </Box>
             </Button>
         </CardWithIcon>
     );
 };
 
-export default Rooms;
+export default Devices;

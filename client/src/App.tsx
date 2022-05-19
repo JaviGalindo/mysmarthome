@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Admin, CustomRoutes, Resource, fetchUtils } from 'react-admin';
+import { Admin, Resource, fetchUtils } from 'react-admin';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-import { Route } from 'react-router';
 
 import authProvider from './authProvider';
 import { Login, Layout } from './layout';
@@ -10,21 +9,12 @@ import englishMessages from './i18n/en';
 import { lightTheme } from './layout/themes';
 
 import devices from './devices';
-import orders from './orders';
-import products from './products';
-import invoices from './invoices';
-import categories from './categories';
 import rooms from './rooms';
-// import dataProviderFactory from './dataProvider';
-import Configuration from './configuration/Configuration';
-import Segments from './segments/Segments';
+import notifications from './notifications';
+import users from './users';
 import simpleRestProvider from 'ra-data-simple-rest';
 
 const i18nProvider = polyglotI18nProvider(locale => {
-    if (locale === 'fr') {
-        return import('./i18n/fr').then(messages => messages.default);
-    }
-
     // Always fallback on english
     return englishMessages;
 }, 'en');
@@ -53,20 +43,10 @@ const App = () => {
             disableTelemetry
             theme={lightTheme}
         >
-            <CustomRoutes>
-                <Route path="/configuration" element={<Configuration />} />
-                <Route path="/segments" element={<Segments />} />
-            </CustomRoutes>
             <Resource name="devices" {...devices} />
-            <Resource
-                name="commands"
-                {...orders}
-                options={{ label: 'Orders' }}
-            />
-            <Resource name="invoices" {...invoices} />
-            <Resource name="products" {...products} />
-            <Resource name="categories" {...categories} />
             <Resource name="rooms" {...rooms} />
+            <Resource name="notifications" {...notifications} />
+            <Resource name="users" {...users}/>
         </Admin>
     );
 };

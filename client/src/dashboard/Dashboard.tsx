@@ -2,7 +2,7 @@ import React from 'react';
 
 import Welcome from './Welcome';
 import Rooms from './Rooms';
-import NewCustomers from './NewCustomers';
+import Devices from './Devices';
 
 
 const styles = {
@@ -16,18 +16,16 @@ const styles = {
 const Spacer = () => <span style={{ width: '1em' }} />;
 
 const Dashboard = () => {
-  
-       return (
+
+    return (
         <>
             <Welcome />
             <div style={styles.flex}>
                 <div style={styles.leftCol}>
                     <div style={styles.flex}>
-                        <Rooms />
-                        
+                        <Devices />
                         <Spacer />
                         <Rooms />
-                        
                     </div>
                 </div>
             </div>
