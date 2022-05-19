@@ -12,6 +12,15 @@ async function getNotificationsByAuth(auth) {
 	return undefined;
 }
 
+async function getNotificationsByDeviceId(deviceId) {
+	const results = await getByField(TABLE_NAME, deviceId, "deviceId");
+	if(results && results.length === 1) {
+		return results[0];
+	}
+	return undefined;
+}
+
 module.exports = {
 	getNotificationsByAuth,
+	getNotificationsByDeviceId
 };

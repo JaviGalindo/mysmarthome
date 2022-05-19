@@ -65,5 +65,6 @@ module.exports = {
 	getAll,
 	insertResource,
 	updateResource,
-	deleteResource
+	deleteResource,
+	findAndReturnResource
 };
