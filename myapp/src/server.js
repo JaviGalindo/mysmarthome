@@ -5,7 +5,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 const mysqlConnection = require("./databases/mysql");
 
-const {devices, rooms, routines, providers, notifications, users } = require("./routes");
+const {devices, rooms, routines, providers, notifications, users, userNotifications } = require("./routes");
 const app = express();
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -28,6 +28,7 @@ app.use("/rooms", rooms);
 app.use("/routines", routines);
 app.use("/providers", providers);
 app.use("/notifications", notifications);
+app.use("/userNotifications", userNotifications);
 app.use("/users", users);
 
 
