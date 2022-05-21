@@ -66,13 +66,8 @@ https://www.coreycleary.me/project-structure-for-an-express-rest-api-when-there-
 
 ### Pending tasks
 #### Client
-- [ ] Do CRUD for Devices (forms, etc)
-- [ ] Dashboard for Devices
-- [ ] User Logged in (see if it can be implemented, if not just Mock)
 - [ ] Test Notifications from Camera inside Docker
 - [ ] Clean files 
 
 #### Server
-- [ ] Create new Table for notifications
-- [ ] HandleNotifications config for devices and users
 - [ ] Update swagger
