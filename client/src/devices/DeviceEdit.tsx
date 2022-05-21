@@ -11,14 +11,13 @@ import {
 import { Grid, Box, Typography } from '@mui/material';
 import Notifications from './Notifications';
 
-// import Aside from './Aside';
+import Aside from './Aside';
 // const { JsonInput } = require('@bb-tech/ra-components');
 const Spacer = () => <Box m={1}>&nbsp;</Box>;
 
 const DeviceEdit = () => {
     return (
-        // <Edit title="Edit Device" aside={<Aside />}>
-        <Edit title="Edit Device" >
+        <Edit title="Edit Device" aside={<Aside />} >
             <SimpleForm>
                 <div>
                     <Typography variant="h6" gutterBottom>
