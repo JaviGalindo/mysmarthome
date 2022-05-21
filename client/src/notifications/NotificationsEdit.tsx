@@ -6,7 +6,12 @@ import {
     SimpleForm,
     ReferenceInput,
     SelectInput,
-    useNotify, useRedirect
+    useNotify,
+    useRedirect,
+    ReferenceField,
+    TextField,
+    Toolbar,
+    SaveButton
 } from 'react-admin';
 import { Grid, Box, Typography } from '@mui/material';
 import { detectionTypes, notificationTypes } from "./notificationConfigValues"
@@ -15,13 +20,18 @@ const Spacer = () => <Box m={1}>&nbsp;</Box>;
 const NotificationsEdit = () => {
     const notify = useNotify();
     const redirect = useRedirect();
-    const onSuccess = (data:any) => {
+    const onSuccess = (data: any) => {
         notify(`Changes saved`);
         redirect(`/devices/${data.deviceId}`);
     };
+    const PostEditToolbar = (props:any) => (
+        <Toolbar {...props} >
+            <SaveButton />
+        </Toolbar>
+    );
     return (
-        <Edit title="Edit Notification"  mutationOptions={{onSuccess}}>
-            <SimpleForm>
+        <Edit title="Edit Notification" mutationOptions={{ onSuccess }} >
+            <SimpleForm toolbar={<PostEditToolbar />}>
                 <div>
                     <Typography variant="h6" gutterBottom>
                         Edit Notification
@@ -32,17 +42,18 @@ const NotificationsEdit = () => {
                             label="Push notification subscription Id"
                             fullWidth
                         />
+                        <ReferenceField source="userId" reference="users" >
+                            <TextField source="email" label="User Email" />
+                        </ReferenceField >
+                        <Spacer />
                         {/* <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                                     <JsonInput source="config" multiline />
                                 </Box> */}
-                        <NullableBooleanInput sx={{marginTop:"8px"}}
+                        <NullableBooleanInput sx={{ marginTop: "8px" }}
                             source="config.active"
                             label="Active"
                         />
-                        <Spacer />
-                        <ReferenceInput source="userId" reference="users">
-                            <SelectInput source="email" />
-                        </ReferenceInput>
+
                         <Spacer />
                         <ReferenceInput source="deviceId" reference="devices">
                             <SelectInput source="name" />
