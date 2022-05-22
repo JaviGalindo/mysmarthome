@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysqldb:3306
--- Generation Time: May 17, 2022 at 03:22 PM
+-- Generation Time: May 22, 2022 at 12:05 PM
 -- Server version: 5.7.38
 -- PHP Version: 8.0.19
 
@@ -42,7 +42,7 @@ CREATE TABLE `devices` (
 --
 
 INSERT INTO `devices` (`id`, `name`, `roomId`, `providerId`, `config`, `active`) VALUES
-(2, 'Camera', NULL, 3, NULL, 1),
+(2, 'Camera', 6, 3, '{\"type\": [\"Email\", \"Push\", \"All\"], \"active\": \"boolean\", \"detection\": [\"Human\", \"All\"], \"timeRange\": \"string\", \"subscription\": \"PushSubscription\"}', 1),
 (3, 'Plug 1', NULL, 1, NULL, 1),
 (4, 'Camera Garden', 6, 1, NULL, 0),
 (5, 'Strip Lights', 4, 1, NULL, 1),
@@ -59,8 +59,16 @@ CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `deviceId` int(11) NOT NULL,
-  `config` json DEFAULT NULL
+  `config` json DEFAULT NULL,
+  `subscriptionAuth` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `userId`, `deviceId`, `config`, `subscriptionAuth`) VALUES
+(1, 1, 2, '{\"type\": \"All\", \"active\": true, \"detection\": \"All\", \"timeRange\": \"\"}', '-urI8x5_4q1ccuS7pLCO5Q');
 
 -- --------------------------------------------------------
 
@@ -103,7 +111,7 @@ INSERT INTO `rooms` (`id`, `name`) VALUES
 (2, 'Studio'),
 (4, 'Living room'),
 (5, 'Landinsg'),
-(6, 'Gardens'),
+(6, 'Garden'),
 (7, 'Front Door'),
 (8, 'my room');
 
@@ -121,13 +129,22 @@ CREATE TABLE `routines` (
   `schedule` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `routines`
+-- Table structure for table `userNotifications`
 --
 
-INSERT INTO `routines` (`id`, `userId`, `deviceId`, `name`, `schedule`) VALUES
-(1, 1, 5, 'Switch off strip lights everyday at 23', '0 23 * * *'),
-(3, 1, 3, 'Switch on Plug 1 everyday at 23', '0 9 * * *');
+CREATE TABLE `userNotifications` (
+  `id` int(11) NOT NULL,
+  `notificationId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `deviceId` int(11) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `picture` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -147,7 +164,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `active`) VALUES
-(1, 'Admin', 'admin@admin.com', 1);
+(1, 'Admin', 'javi.munoz.galindo@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -167,10 +184,7 @@ CREATE TABLE `users_devices` (
 INSERT INTO `users_devices` (`userId`, `deviceId`) VALUES
 (1, 2),
 (1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7);
+(1, 4);
 
 --
 -- Indexes for dumped tables
@@ -213,6 +227,15 @@ ALTER TABLE `routines`
   ADD KEY `userFK` (`userId`);
 
 --
+-- Indexes for table `userNotifications`
+--
+ALTER TABLE `userNotifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notificationIdFK` (`notificationId`),
+  ADD KEY `userNotificationsFK` (`userId`),
+  ADD KEY `deviceNotificationsFK` (`deviceId`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -239,7 +262,7 @@ ALTER TABLE `devices`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `providers`
@@ -257,13 +280,19 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `routines`
 --
 ALTER TABLE `routines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `userNotifications`
+--
+ALTER TABLE `userNotifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -289,6 +318,14 @@ ALTER TABLE `notifications`
 ALTER TABLE `routines`
   ADD CONSTRAINT `deviceFK` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `userFK` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `userNotifications`
+--
+ALTER TABLE `userNotifications`
+  ADD CONSTRAINT `deviceNotificationsFK` FOREIGN KEY (`deviceId`) REFERENCES `devices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notificationIdFK` FOREIGN KEY (`notificationId`) REFERENCES `notifications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userNotificationsFK` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users_devices`
