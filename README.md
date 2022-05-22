@@ -66,8 +66,5 @@ https://www.coreycleary.me/project-structure-for-an-express-rest-api-when-there-
 
 ### Pending tasks
 #### Client
-- [ ] Test Notifications from Camera inside Docker
 - [ ] Clean files 
 
-#### Server
-- [ ] Update swagger
