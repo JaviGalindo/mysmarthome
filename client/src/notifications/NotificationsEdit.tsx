@@ -17,21 +17,30 @@ import { Grid, Box, Typography } from '@mui/material';
 import { detectionTypes, notificationTypes } from "./notificationConfigValues"
 const Spacer = () => <Box m={1}>&nbsp;</Box>;
 
-const NotificationsEdit = () => {
+
+const NotificationsSaveButton = (props: any) => {
     const notify = useNotify();
     const redirect = useRedirect();
-    const onSuccess = (data: any) => {
-        notify(`Changes saved`);
-        redirect(`/devices/${data.deviceId}`);
+    const onSuccess = (response: any) => {
+        notify(`Notification saved! Redirecting...`, {undoable: true});
+        setTimeout(function () {
+            redirect(`/devices/${response.deviceId}`);
+        }, 2000);
+
     };
-    const PostEditToolbar = (props:any) => (
-        <Toolbar {...props} >
-            <SaveButton />
-        </Toolbar>
-    );
+    return <SaveButton {...props} mutationOptions={{onSuccess}} type="button" />;
+};
+const NotificationsEditToolbar = (props:any) => (
+    <Toolbar {...props} >
+        <NotificationsSaveButton  />
+    </Toolbar>
+);
+
+const NotificationsEdit = () => {
+
     return (
-        <Edit title="Edit Notification" mutationOptions={{ onSuccess }} >
-            <SimpleForm toolbar={<PostEditToolbar />}>
+        <Edit title="Edit Notification" >
+            <SimpleForm toolbar={<NotificationsEditToolbar />}>
                 <div>
                     <Typography variant="h6" gutterBottom>
                         Edit Notification

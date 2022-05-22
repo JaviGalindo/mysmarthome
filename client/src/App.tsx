@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Admin, Resource, fetchUtils } from 'react-admin';
-import polyglotI18nProvider from 'ra-i18n-polyglot';
 
 import authProvider from './authProvider';
 import { Login, Layout } from './layout';
 import { Dashboard } from './dashboard';
-import englishMessages from './i18n/en';
 import { lightTheme } from './layout/themes';
 
 import devices from './devices';
@@ -13,11 +11,6 @@ import rooms from './rooms';
 import notifications from './notifications';
 import users from './users';
 import simpleRestProvider from 'ra-data-simple-rest';
-
-const i18nProvider = polyglotI18nProvider(locale => {
-    // Always fallback on english
-    return englishMessages;
-}, 'en');
 
 const fetchJson = (url:string, options:any = {}) => {
     if (!options.headers) {
@@ -39,7 +32,6 @@ const App = () => {
             dashboard={Dashboard}
             loginPage={Login}
             layout={Layout}
-            i18nProvider={i18nProvider}
             disableTelemetry
             theme={lightTheme}
         >
