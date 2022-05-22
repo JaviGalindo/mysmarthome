@@ -1,7 +1,8 @@
 [
     {
-        "userId": "68f90ed3-4f08-4a07-ad1e-387f495ea898",
-        "deviceId": "ac588d0c-db7e-485e-a838-0d901c95e12a",
+        "routineId": 1,
+        "userId": 2,
+        "deviceId": 5,
         "name": "Switch off strip lights everyday at 23",
         "schedule": "0 23 * * *"
     }

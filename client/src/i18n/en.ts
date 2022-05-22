@@ -148,7 +148,7 @@ const customEnglishMessages: TranslationMessages = {
                 image: 'Image',
                 details: 'Details',
                 description: 'Description',
-                reviews: 'Reviews',
+                reviews: 'Rooms',
             },
             filters: {
                 categories: 'Categories',
@@ -171,10 +171,10 @@ const customEnglishMessages: TranslationMessages = {
             },
         },
         rooms: {
-            name: 'Review |||| Reviews',
-            amount: '1 review |||| %{smart_count} reviews',
-            relative_to_poster: 'Review on poster',
-            detail: 'Review detail',
+            name: 'Rooms |||| Rooms',
+            amount: '1 Rooms |||| %{smart_count} Roomss',
+            relative_to_poster: 'Rooms on poster',
+            detail: 'Rooms detail',
             fields: {
                 customer_id: 'Customer',
                 command_id: 'Order',
@@ -190,10 +190,10 @@ const customEnglishMessages: TranslationMessages = {
                 reject: 'Reject',
             },
             notification: {
-                approved_success: 'Review approved',
-                approved_error: 'Error: Review not approved',
-                rejected_success: 'Review rejected',
-                rejected_error: 'Error: Review not rejected',
+                approved_success: 'Room approved',
+                approved_error: 'Error: Room not approved',
+                rejected_success: 'Room rejected',
+                rejected_error: 'Error: Room not rejected',
             },
         },
         segments: {

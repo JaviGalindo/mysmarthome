@@ -1,12 +1,12 @@
 [
     {
-        "providerId": "214f76ae-de2a-4ce5-920a-85c127baece1",
+        "providerId": 1,
         "name": "Amazon",
         "SSO": "",
         "connection": ""
     },
     {
-        "providerId": "8d37ebb2-1f1e-4f24-853a-754b31cfabf5",
+        "providerId":2,
         "name": "Google",
         "SSO": "",
         "connection": ""

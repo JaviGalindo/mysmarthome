@@ -22,10 +22,10 @@ import {
 import { useMediaQuery, Divider, Tabs, Tab, Theme } from '@mui/material';
 
 import NbItemsField from './NbItemsField';
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
-import AddressField from '../visitors/AddressField';
+import CustomerReferenceField from '../devices/CustomerReferenceField';
+import AddressField from '../devices/AddressField';
 import MobileGrid from './MobileGrid';
-import { Customer } from '../types';
+import { User } from '../types';
 
 const OrderList = () => (
     <List
@@ -42,7 +42,7 @@ const orderFilters = [
     <SearchInput source="q" alwaysOn />,
     <ReferenceInput source="customer_id" reference="customers">
         <AutocompleteInput
-            optionText={(choice?: Customer) =>
+            optionText={(choice?: User) =>
                 choice?.id // the empty choice is { id: '' }
                     ? `${choice.first_name} ${choice.last_name}`
                     : ''

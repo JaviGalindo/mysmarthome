@@ -62,3 +62,12 @@ docker-compose down
 
 ### API structure
 https://www.coreycleary.me/project-structure-for-an-express-rest-api-when-there-is-no-standard-way
+
+
+### Pending tasks
+#### Client
+- [ ] Test Notifications from Camera inside Docker
+- [ ] Clean files 
+
+#### Server
+- [ ] Update swagger

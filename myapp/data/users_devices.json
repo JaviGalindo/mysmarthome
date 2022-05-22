@@ -1,34 +1,34 @@
 [
     {
-        "userId": "33adc5c7-f761-4464-aed4-04e51ef923e9",
-        "deviceId": "b84834c1-36ed-4f1c-9dff-d9ac41d932f8"
+        "userId": 1,
+        "deviceId": 1
     },
     {
-        "userId": "33adc5c7-f761-4464-aed4-04e51ef923e9",
-        "deviceId": "688cc87f-7375-4857-96ec-8747fde9c285"
+        "userId": 1,
+        "deviceId": 2
     },
     {
-        "deviceId": "312c2d5d-3420-4686-ac92-ea56de710267",
-        "userId": "33adc5c7-f761-4464-aed4-04e51ef923e9"
+        "deviceId": 3,
+        "userId": 1
     },
     {
-        "deviceId": "d5fb1890-1ec2-4550-8a7b-871f4a7669d0",
-        "userId": "33adc5c7-f761-4464-aed4-04e51ef923e9"
+        "deviceId": 4,
+        "userId": 1
     },
     {
-        "deviceId": "ac588d0c-db7e-485e-a838-0d901c95e12a",
-        "userId": "68f90ed3-4f08-4a07-ad1e-387f495ea898"
+        "deviceId": 5,
+        "userId": 2
     },
     {
-        "deviceId": "3f12aa60-8c57-4309-ac26-db2379b036c8",
-        "userId": "68f90ed3-4f08-4a07-ad1e-387f495ea898"
+        "deviceId": 6,
+        "userId": 2
     },
     {
-        "deviceId": "fbc7a656-3d00-4355-b6d3-6648989ad906",
-        "userId": "68f90ed3-4f08-4a07-ad1e-387f495ea898"
+        "deviceId": 7,
+        "userId": 2
     },
     {
-        "deviceId": "2de2aed7-440a-4ec4-93d7-70f7d13a54f4",
-        "userId": "68f90ed3-4f08-4a07-ad1e-387f495ea898"
+        "deviceId": 8,
+        "userId": 2
     }
 ]

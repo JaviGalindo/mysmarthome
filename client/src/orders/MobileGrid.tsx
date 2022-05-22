@@ -13,7 +13,7 @@ import {
     RecordContextProvider,
 } from 'react-admin';
 
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
+import CustomerReferenceField from '../devices/CustomerReferenceField';
 import { Order } from '../types';
 
 interface MobileGridProps {

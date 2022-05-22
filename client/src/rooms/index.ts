@@ -1,9 +1,10 @@
-import RoomIcon from '@mui/icons-material/Comment';
+import RoomPreferences from '@mui/icons-material/RoomPreferences';
 import RoomCreate from './RoomCreate';
 import RoomList from './RoomList';
-
-export default {
-    icon: RoomIcon,
+const Room =  {
+    icon: RoomPreferences,
     list: RoomList,
     create: RoomCreate,
 };
+
+export default Room

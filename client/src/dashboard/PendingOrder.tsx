@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useTranslate, useReference } from 'react-admin';
 
-import { Customer, Order } from '../types';
+import { User, Order } from '../types';
 
 interface Props {
     order: Order;
@@ -19,7 +19,7 @@ interface Props {
 export const PendingOrder = (props: Props) => {
     const { order } = props;
     const translate = useTranslate();
-    const { referenceRecord: customer, isLoading } = useReference<Customer>({
+    const { referenceRecord: customer, isLoading } = useReference<User>({
         reference: 'customers',
         id: order.customer_id,
     });
