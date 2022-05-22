@@ -1,0 +1,33 @@
+{
+  "name": "securitycamera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "startServer": "node server.js",
+    "start": "node server.js && node startCamera.js",
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },
+  "repository": {
+    "type": "git"
+
+  },
+  "author": "Javi Galindo",
+  "license": "ISC",
+  "bugs": {
+
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
+    "@tensorflow/tfjs-node": "^3.17.0",
+    "@vladmandic/face-api": "^1.6.8",
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "eslint": "^8.15.0",
+    "express": "^4.17.3",
+    "path": "^0.12.7",
+    "web-push": "^3.4.5"
+  }
+}
