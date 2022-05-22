@@ -40,7 +40,8 @@ const EventList = () => {
             id: record.id,
         },
     );
-
+    const filteredNotifications = userNotifications?.filter(notification => notification.deviceId === record.id)
+        if(!filteredNotifications || !filteredNotifications.length) return null;
     return (
         <Box ml={2}>
             <Card>

@@ -18,7 +18,6 @@ export const TableCellRight = styled(TableCell)({ textAlign: 'right' });
 const Notifications = () => {
     const record = useRecordContext<Device>();
 
-
     const { isLoading, data: notifications } = useGetManyReference<Notification>(
         'notifications',
         { 
@@ -28,7 +27,9 @@ const Notifications = () => {
         },
     );
 
-    if (isLoading || !record || !notifications) return null;
+    const filteredNotifications = notifications?.filter(notification => notification.deviceId === record.id)
+
+    if (isLoading || !record || !filteredNotifications?.length) return null;
 
     return (
         <Table>
@@ -49,7 +50,7 @@ const Notifications = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {notifications.map((item: any) => (
+                {notifications?.map((item: any) => (
                     <TableRow key={item.id}>
                         <TableCell>
                             <Link to={`/notifications/${item.id}`}>
