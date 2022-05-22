@@ -1,36 +1,75 @@
 # My Smart Home 🏠
 
-## How to run it
+## How to run it ⚡
+- Download the project (git clone or download as zip from github)
+- Install docker
+- Create env file in root (check next section)
+- Run docker-compose from the root folder (where docker-compose.yml is located)
+- Go to ```http://localhost:3000```
+- Login Admin/Admin
+- Go to Admin user and edit email address to your preference
+- Go to devices -> Camera
+- Check if it has an active notification subscription
+- Edit the subscription auth (for push notifications)
+    - You will need to go to cameraServer logs in docker to get the auth subscription id
+- Edit the auth subscription and save it
+- Open new browser tab o postman or similar and make a request to ``` http://localhost:9000/simulateMotion```
+- ```Notification sent``` message should have been displayed
+- At somepoint you should be able the push notification and/or an email in your inbox
+
+🚨🚨🚨🚨 For testing purposes DO NOT DELETE OR CHANGE Camera device, Notification or USER 🚨🚨🚨🚨
+
+
+## env file example
 Create new file .env in / with following variables:
 
 ```
-MYSQLDB_USER=
-MYSQLDB_ROOT_PASSWORD=
-MYSQLDB_DATABASE=b
-MYSQLDB_LOCAL_PORT=3307
-MYSQLDB_DOCKER_PORT=3306
+MYSQLDB_USER
+MYSQLDB_ROOT_PASSWORD
+MYSQLDB_DATABASE
+MYSQLDB_PORT
+MYSQLDB_HOST
 
-MONGODB_USER=
-MONGODB_ROOT_PASSWORD=
-MONGODB_DATABASE=
-MONGODB_LOCAL_PORT=27017
-MONGODB_DOCKER_PORT=27017
+API_PORT
 
-NODE_LOCAL_PORT=80
-NODE_DOCKER_PORT=3000
+PUBLIC_VAPID_KEY
+PRIVATE_VAPID_KEY
+WEB_PUSH_CONTACT
+
+
+#camera
+
+PUBLIC_VAPID_KEY
+PRIVATE_VAPID_KEY
+WEB_PUSH_CONTACT
+CAMERA_API 
+CAMERA_API_PORT 
+APP_PORT
+APP_API
+from 
+SENDGRID_API_KEY
+
+#Frontend
+
+REACT_APP_SUBSCRIPTION_URL
+REACT_APP_PUBLIC_VAPID_KEY
+SKIP_PREFLIGHT_CHECK
+REACT_APP_API_URL
+REACT_APP_API_PORT
+
 ```
 
 Docker will create a new container with the following servers:
 
-- NodeJS: Backend of the application
+- App - NodeJS: Backend of the application
+- securityCamera - NodeJS: Backend of the application
+- client - React: Frontend of the application
 - MySQL: Relational database for the APP
-- MongoDB: Non-Relational database for the APP
 - phpMyAdmin: runs phpmyadmin server to manage MySql databases
 
 To connect to the databases:
 
 - MySQL: phpMyAdmin -> login -> {MYSQLDB_USER} & {MYSQLDB_ROOT_PASSWORD}
-- MongoDB Compass: connection string: ``` mongodb://localhost:{MONGODB_LOCAL_PORT}/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false ```
 
 The services can be run on the background with command:
 ```bash
@@ -43,21 +82,6 @@ Stopping all the running containers is also simple with a single command:
 docker-compose down
 ```
 
-## Integrations
-
-### Eufy
-    https://www.npmjs.com/package/eufy-security-client
-### Home Assistant
-    https://www.home-assistant.io/
-    https://www.home-assistant.io/installation/raspberrypi#docker-compose
-### Google 
-    https://developers.google.com/nest/device-access/codelabs/web-app#0   
-    https://developers.google.com/nest/device-access/project
-### Alexa
-    https://developer.amazon.com/en-US/docs/alexa/smarthome/understand-the-smart-home-skill-api.html
-### tp-link
-    https://github.com/konsumer/tplink-lightbulb/blob/main/API.md
-
 
 
 ### API structure
@@ -65,6 +89,4 @@ https://www.coreycleary.me/project-structure-for-an-express-rest-api-when-there-
 
 
 ### Pending tasks
-#### Client
-- [ ] Clean files 
 
