@@ -10,12 +10,9 @@
 - Go to Admin user and edit email address to your preference
 - Go to devices -> Camera
 - Check if it has an active notification subscription
-- Edit the subscription auth (for push notifications)
-    - You will need to go to cameraServer logs in docker to get the auth subscription id
-- Edit the auth subscription and save it
 - Open new browser tab o postman or similar and make a request to ``` http://localhost:9000/simulateMotion```
-- ```Notification sent``` message should have been displayed
-- At somepoint you should be able the push notification and/or an email in your inbox
+- ```Motion simulated``` message should have been displayed
+- At somepoint you should see the push notification and/or an email in your inbox
 
 🚨🚨🚨🚨 For testing purposes DO NOT DELETE OR CHANGE Camera device, Notification or USER 🚨🚨🚨🚨
 
