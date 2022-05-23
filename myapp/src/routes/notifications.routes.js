@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {getAll, getById, deleteResource, insertResource} = require("../controllers/common.controller");
-const { getByAuth, getByDeviceId, updateNotificationResource } = require("../controllers/notifications.controller");
+const { getByAuth, getByDeviceId, updateNotificationResource, updateAuthNotification } = require("../controllers/notifications.controller");
 
 
   
@@ -14,6 +14,8 @@ router.get("/devices/:deviceId", getByDeviceId);
 router.post("/", insertResource);
   
 router.put("/:id", updateNotificationResource);
+
+router.post("/saveAuth/:id", updateAuthNotification);
   
 router.delete("/:id", deleteResource);
 

@@ -35,8 +35,25 @@ const updateNotificationResource = async (req,res) => {
 	return res.status(500).send(`Error updating ${resource} with id: ${found.id}`);
 };
 
+
+const updateAuthNotification = async (req,res) => {
+	const resource = getResourceNameFromPath(req.baseUrl);
+	const found = await findAndReturnResource(resource, req.params.id);
+	if(found.subscriptionAuth === req.body.subscriptionAuth) {
+		return res.status(200).send("Auth updated");
+	}
+	const notificationsObj = {subscriptionAuth: req.body.subscriptionAuth};
+	await updateResource(resource, notificationsObj, req.params.id);
+	
+	if(found) {
+		return res.status(200).send("Auth updated");
+	}
+	return res.status(500).send(`Error updating ${resource} with id: ${found.id}`);
+};
+
 module.exports = {
 	getByAuth,
 	getByDeviceId,
-	updateNotificationResource
+	updateNotificationResource,
+	updateAuthNotification
 };
