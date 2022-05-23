@@ -1,13 +1,14 @@
 
 const executeNotificationProcess = require("./executeNotificationProcess");
 const getUserNotificationData = require("./getUserNotificationData");
-const arrImages = [
-	"./public/humans.jpg",
-	"./public/gardenImage.jpg"
-];
-const imagePath = arrImages[Math.floor((Math.random() * arrImages.length))];
+
 
 const simulateMotion = async () => {
+	const arrImages = [
+		"./public/humans.jpg",
+		"./public/gardenImage.jpg"
+	];
+	const imagePath = arrImages[Math.floor((Math.random() * arrImages.length))];
 	try {
 		console.log("Simulate Motion - Motion detected -->", new Date());
 		const {type, active, detection, timeRange, email, deviceId, notificationId, userId} = await getUserNotificationData();

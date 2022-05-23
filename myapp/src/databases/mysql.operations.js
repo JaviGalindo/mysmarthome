@@ -35,7 +35,7 @@ async function update(table, data, id) {
 
 	const updateQ = returnUpdateSintaxFromObj(table, data);
 	const [results] =  await connection.execute(updateQ, [...Object.values(data), id]);
-	if(results.changedRows === 1 && results.changedRows) {
+	if(results.changedRows && results.changedRows === 1) {
 		return true;
 	}
 	throw new Error(`Error updationg ${table} with Id: ${id}`);
