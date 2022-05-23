@@ -5,7 +5,9 @@ const cors = require("cors");
 
 const {setSubscription} = require("./utils/subscriptionData");
 const { simulateMotion } = require("./utils/fakeCamera");
-const {VAPID, cameraServer} = require("./config/config");
+const {cameraServer} = require("./config/config");
+const axios = require("axios");
+const { api, port } = require("./config/config").APPServer;
 
 const app = express();
 
@@ -21,35 +23,29 @@ app.get("/health-check", (req, res) => {
 	res.status(200).send("ok");
 });
 
-app.post("/notifications/subscribe", (req, res) => {
-	subscription =  req.body;
-	console.log("Subscription", subscription);
-	setSubscription(subscription);
-
-	res.status(200).json({ "success": true });
-});
-
-app.post("/notifications/send", (req, res) => {
-	if (subscription) {
-		console.log("Sending notification in server");
-		const {title} = req.body;
-		const payload = JSON.stringify({
-			title,
-			image: "./image.jpg"
+app.post("/notifications/subscribe", async (req, res) => {
+	try{
+		subscription =  req.body;
+		console.log("Subscription", subscription);
+		setSubscription(subscription);
+		await axios.post(`${api}:${port}/notifications/saveAuth/1`, {
+			subscriptionAuth: subscription.keys.auth
 		});
-		
-	}
 
-	res.status(200).json({ "success": true });
+		res.status(200).json({ "success": true });
+	}catch(error){
+		console.error("Unexpected error subscribing push", error);
+		res.status(500).send("Unexpected error subscribing push");
+	}
 });
 
 app.get("/simulateMotion", async (req, res)=>{
 	try {
-	await simulateMotion();
-		res.status(200).send("Notification sent");
+		await simulateMotion();
+		res.status(200).send("Motion simulated");
 	} catch (error) {
-		console.error("Unexpected error simulating motion", error)
-		res.status(500).send("Error in Camera server")
+		console.error("Unexpected error simulating motion", error);
+		res.status(500).send("Error in Camera server");
 	}
 });
 app.listen(cameraServer.port, () => console.log(`The server has been started on the port ${cameraServer.port}`));
