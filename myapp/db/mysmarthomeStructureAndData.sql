@@ -164,7 +164,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `active`) VALUES
-(1, 'Admin', 'javi.munoz.galindo@gmail.com', 1);
+(1, 'Admin', 'email@gmail.com', 1);
 
 -- --------------------------------------------------------
 
