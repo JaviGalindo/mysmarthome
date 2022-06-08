@@ -26,7 +26,7 @@ const RoomCreate = () => (
             sx={{ maxWidth: 500 }}
             validate={validateForm}
         >
-            <SectionTitle label="Device" />
+            <SectionTitle label="Room" />
             <TextInput source="name" isRequired fullWidth />
         </SimpleForm>
     </Create>
